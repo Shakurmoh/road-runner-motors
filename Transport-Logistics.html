@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport & Logistics Services | RRM Limited</title>
+    <meta name="description" content="Integrated road, rail, and multimodal transport solutions, managed end-to-end for safe and timely movement.">
+    <meta property="og:title" content="Transport & Logistics Services | RRM Limited">
+    <meta property="og:description" content="Integrated road, rail, and multimodal transport solutions, managed end-to-end for safe and timely movement.">
+    <meta property="og:image" content="https://placehold.co/1200x630/000000/FFD32A?text=RRM+Transport+Logistics">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rrm-yellow': '#FFD32A',
+                        'rrm-dark': '#000000',
+                        'rrm-gray': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-down': 'fadeInDown 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const mobileButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const logo = document.getElementById('logo-main');
+
+            // Enhanced scroll handler with smooth transitions
+            const handleScroll = () => {
+                const scrolled = window.scrollY > 100;
+                
+                if (scrolled) {
+                    header.classList.add('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.remove('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.add('text-gray-300'));
+                    navLinks.forEach(link => link.classList.remove('text-white'));
+                    logo.classList.add('text-gray-300');
+                    logo.classList.remove('text-white');
+                } else {
+                    header.classList.remove('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.add('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.remove('text-gray-300'));
+                    navLinks.forEach(link => link.classList.add('text-white'));
+                    logo.classList.remove('text-gray-300');
+                    logo.classList.add('text-white');
+                }
+            };
+
+            // Scroll event listener with throttling
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Initial call
+            handleScroll();
+
+            // Mobile menu functionality
+            mobileButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('animate-fade-in-down');
+            });
+
+            // Close mobile menu when link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('animate-fade-in-down');
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+    <style>
+        #main-header {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(0px);
+        }
+
+        .professional-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d2d2d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFD32A;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffc107;
+        }
+
+        .logo-image {
+            height: 60px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/transport.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .process-step {
+            position: relative;
+        }
+
+        .process-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -40px;
+            width: 80px;
+            height: 2px;
+            background: #FFD32A;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card-image {
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card-wrapper:hover .service-card-image {
+            transform: scale(1.05);
+        }
+
+        .service-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 60%);
+            pointer-events: none;
+        }
+
+        #card-customs { 
+            background-image: url('images/import.jpg');
+        }
+        #card-international { 
+            background-image: url('images/cord.jpg');
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-body text-gray-700 bg-white">
+
+    <header id="main-header" class="fixed top-0 w-full z-50 py-6 bg-transparent">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="index.html" id="logo-main" class="flex items-center space-x-3 transition-all duration-300 hover:opacity-90">
+                <img src="images/logo.png" alt="RRM Limited Logo" class="logo-image">
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Home</a>
+                <a href="index.html#about" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">About Us</a>
+                <a href="index.html#services" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Services</a>
+                <a href="index.html#customers" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Customers</a>
+                <a href="index.html#contact" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Contact</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-rrm-yellow hover:text-rrm-dark focus:outline-none transition-all duration-300" aria-label="Toggle navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-rrm-dark/95 backdrop-blur-sm shadow-2xl fixed w-full z-40 pt-20 top-0">
+        <a href="index.html" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-t border-gray-700">Home</a>
+        <a href="index.html#about" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">About Us</a>
+        <a href="index.html#services" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Services</a>
+        <a href="index.html#customers" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Customers</a>
+        <a href="index.html#contact" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-b border-gray-700">Contact</a>
+    </div>
+
+    <section class="hero-background py-24 md:py-32 text-white mt-[-100px] pt-40 md:pt-48 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-rrm-yellow rounded-full"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 bg-rrm-yellow rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-heading font-extrabold mb-6 leading-tight animate-fade-in-down">
+                Transport & <span class="text-rrm-yellow">Logistics</span> Services
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                Integrated road, rail, and multimodal transport solutions, managed end-to-end for safe and timely movement.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="index.html#services" class="bg-rrm-yellow text-rrm-dark font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    All Services
+                </a>
+                <a href="index.html#contact" class="border-2 border-rrm-yellow text-white bg-transparent font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:bg-rrm-yellow hover:text-rrm-dark hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-6">Comprehensive Transport Solutions</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        RRM Limited provides integrated transport and logistics services designed to meet the diverse needs of businesses operating in East Africa and beyond. Our solutions are tailored to ensure the safe, efficient, and timely movement of goods.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        With a modern fleet of vehicles, strategic partnerships, and advanced tracking technology, we deliver reliable transport services that support your supply chain objectives and business growth.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Modern Fleet</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Real-time Tracking</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Multi-modal Options</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Route Optimization</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="rounded-2xl shadow-2xl overflow-hidden relative h-96" 
+                         style="background-image: url('images/trn.jpg'); background-size: cover; background-position: center;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Our Transport Solutions</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    Comprehensive transport services tailored to your specific logistics requirements.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Road Transport</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Reliable road freight services with a modern fleet of trucks, trailers, and specialized vehicles for various cargo types across East Africa.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Rail Logistics</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Cost-effective rail transport solutions for bulk cargo, leveraging the growing railway infrastructure in East Africa for efficient long-distance haulage.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Specialized Transport</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Customized solutions for oversized, hazardous, temperature-sensitive, and high-value cargo with specialized equipment and handling protocols.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Our Transport Process</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    A systematic approach to ensure efficient, safe, and reliable transport of your goods.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">1</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Requirement Analysis</h3>
+                    <p class="text-gray-600">
+                        Detailed assessment of your cargo specifications, delivery timelines, and special handling requirements.
+                    </p>
+                </div>
+
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">2</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Route Planning</h3>
+                    <p class="text-gray-600">
+                        Strategic route optimization considering distance, road conditions, border crossings, and delivery schedules.
+                    </p>
+                </div>
+
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">3</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Vehicle Allocation</h3>
+                    <p class="text-gray-600">
+                        Selection of appropriate vehicles and equipment based on cargo type, volume, and special handling needs.
+                    </p>
+                </div>
+
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.3s;">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">4</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Execution & Monitoring</h3>
+                    <p class="text-gray-600">
+                        Real-time tracking and proactive management throughout the transport process with continuous communication.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-rrm-dark text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl font-heading font-bold text-white mb-6">Our Transport Fleet</h2>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        We maintain a modern and diverse fleet to handle various cargo requirements, supported by experienced drivers and advanced tracking technology.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">General cargo trucks (3T, 5T, 10T, 20T capacity)</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Refrigerated trucks for temperature-sensitive goods</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Flatbed trailers for oversized and heavy cargo</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Tanker trucks for liquid and bulk materials</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Container carriers for port-to-door delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-rrm-gray rounded-2xl p-8 shadow-2xl animate-on-scroll" style="animation-delay: 0.1s;">
+                    <h3 class="text-2xl font-heading font-bold text-white mb-6">Need Transport Solutions?</h3>
+                    <p class="text-gray-300 mb-6">
+                        Our transport experts can design a logistics solution that meets your specific requirements, whether for local distribution or cross-border transport.
+                    </p>
+                    <a href="index.html#contact" class="inline-block bg-rrm-yellow text-rrm-dark font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        Get a Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+<!-- Footer (Retained for feel) -->
+    <footer class="bg-rrm-dark text-gray-300 py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-rrm-yellow font-heading font-bold text-2xl mb-4">RRM Limited</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Professional logistics and clearing services for seamless international trade operations.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-heading font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-rrm-yellow transition-colors duration-300">Home</a></li>
+                        <li><a href="index.html#about" class="hover:text-rrm-yellow transition-colors duration-300">About Us</a></li>
+                        <li><a href="index.html#services" class="hover:text-rrm-yellow transition-colors duration-300">Services</a></li>
+                        <li><a href="index.html#contact" class="hover:text-rrm-yellow transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-heading font-bold text-lg mb-4">Our Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="customs-clearance.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Customs Clearance</a></li>
+                        <li><a href="International-Coordination.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">International Coordination</a></li>
+                        <!-- Updated Link -->
+                        <li><a href="shipping-port.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Port Coordination</a></li>
+                        <li><a href="Consultancy-Services.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Transport & Logistics</a></li>
+                        <li><a href="added.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Advisory Services</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-heading font-bold text-lg mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>📍 Dar es Salaam, Tanzania</li>
+                        <li>📧 info@rrmlimited.co.tz</li>
+                        <li>📞 +255 654327594</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2024</span> RRM Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

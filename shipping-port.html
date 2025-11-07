@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated Title and Description for the service page -->
+    <title>Shipping & Port Services — RRM Limited</title>
+    <meta name="description" content="Efficient shipping coordination and port operations services from RRM Limited.">
+    <meta property="og:title" content="Shipping & Port Services — RRM Limited">
+    <meta property="og:description" content="Efficient shipping coordination and port operations services from RRM Limited.">
+    <meta property="og:image" content="https://placehold.co/1200x630/000000/FFD32A?text=RRM+Shipping">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rrm-yellow': '#FFD32A',
+                        'rrm-dark': '#000000',
+                        'rrm-gray': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-down': 'fadeInDown 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const mobileButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const logo = document.getElementById('logo-main');
+
+            const handleScroll = () => {
+                const scrolled = window.scrollY > 100;
+                
+                if (scrolled) {
+                    header.classList.add('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.remove('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.add('text-gray-300'));
+                    navLinks.forEach(link => link.classList.remove('text-white'));
+                    logo.classList.add('text-gray-300');
+                    logo.classList.remove('text-white');
+                } else {
+                    header.classList.remove('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.add('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.remove('text-gray-300'));
+                    navLinks.forEach(link => link.classList.add('text-white'));
+                    logo.classList.remove('text-gray-300');
+                    logo.classList.add('text-white');
+                }
+            };
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            handleScroll();
+
+            mobileButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('animate-fade-in-down');
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('animate-fade-in-down');
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+            
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+    <style>
+        #main-header {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .professional-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d2d2d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFD32A;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffc107;
+        }
+
+        .logo-image {
+            height: 60px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-background {
+            /* Updated image for port services */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero2.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .process-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-left: 4px solid #FFD32A;
+            transition: all 0.3s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 211, 42, 0.2);
+        }
+
+        .service-card-image {
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card-wrapper:hover .service-card-image {
+            transform: scale(1.05);
+        }
+
+        .service-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 60%);
+            pointer-events: none;
+        }
+
+        #card-customs { 
+            background-image: url('images/import.jpg');
+        }
+        #card-port { 
+            background-image: url('images/ship.jpg');
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Unique Style for Vertical Timeline */
+        .timeline-container {
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #FFD32A;
+            transform: translateX(-50%);
+            /* Hide line on small screens */
+            @apply hidden md:block;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            background: #FFD32A;
+            border-radius: 50%;
+            z-index: 10;
+            /* Hide icon on small screens */
+            @apply hidden md:block;
+        }
+        
+        .timeline-item-content {
+            border: 2px solid #2d2d2d;
+            background-color: #1a1a1a;
+            transition: border-color 0.3s ease;
+        }
+        
+        .timeline-item-content:hover {
+            border-color: #FFD32A;
+        }
+
+        /* Styling for content alternating left/right on desktop */
+        .timeline-item:nth-child(even) .timeline-item-content {
+            left: auto;
+            right: 0;
+        }
+
+        /* Mobile adjustments for timeline */
+        @media (max-width: 767px) {
+            .timeline-container::before {
+                left: 20px;
+                display: block; /* Show line on mobile at the left */
+            }
+            .timeline-item-icon {
+                left: 20px;
+                transform: translate(-50%, -50%);
+                display: block; /* Show icon on mobile */
+            }
+            .timeline-item-content {
+                margin-left: 50px;
+                width: calc(100% - 50px);
+            }
+        }
+
+    </style>
+</head>
+<body class="font-body text-gray-700 bg-white">
+
+    <!-- Header Navigation (Retained for feel) -->
+    <header id="main-header" class="fixed top-0 w-full z-50 py-6 bg-transparent">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="index.html" id="logo-main" class="flex items-center space-x-3 transition-all duration-300 hover:opacity-90">
+                <img src="images/logo.png" alt="RRM Limited Logo" class="logo-image">
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Home</a>
+                <a href="index.html#about" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">About Us</a>
+                <a href="index.html#services" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Services</a>
+                <a href="index.html#customers" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Customers</a>
+                <a href="index.html#contact" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Contact</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-rrm-yellow hover:text-rrm-dark focus:outline-none transition-all duration-300" aria-label="Toggle navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu (Retained for feel) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-rrm-dark/95 backdrop-blur-sm shadow-2xl fixed w-full z-40 pt-20 top-0">
+        <a href="index.html" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-t border-gray-700">Home</a>
+        <a href="index.html#about" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">About Us</a>
+        <a href="index.html#services" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Services</a>
+        <a href="index.html#customers" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Customers</a>
+        <a href="index.html#contact" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-b border-gray-700">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-background py-24 md:py-32 text-white mt-[-100px] pt-40 md:pt-48 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-rrm-yellow rounded-full"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 bg-rrm-yellow rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-heading font-extrabold mb-6 leading-tight animate-fade-in-down">
+                Port & Shipping <span class="text-rrm-yellow">Coordination</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                Maximizing vessel turnaround and minimizing delays through expert coordination of port operations, customs, and cargo handling.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="index.html#services" class="bg-rrm-yellow text-rrm-dark font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    All Services
+                </a>
+                <a href="index.html#contact" class="border-2 border-rrm-yellow text-white bg-transparent font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:bg-rrm-yellow hover:text-rrm-dark hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    Get a Quote
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vessel and Terminal Coordination Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                 <div class="animate-on-scroll">
+                    <div class="rounded-2xl shadow-2xl overflow-hidden relative h-96 border-4 border-rrm-yellow" 
+                         style="background-image: url('images/ship.jpg'); background-size: cover; background-position: center;">
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll" style="animation-delay: 0.1s;">
+                    <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-6">Vessel & Terminal Coordination</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        At the heart of efficient logistics is flawless port coordination. We act as the single point of contact between vessel owners, terminal operators, and local authorities to guarantee rapid, secure, and cost-effective berthing and cargo discharge.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Our specialized team manages all aspects of vessel agency and port calls, from securing preferential berths to handling immediate crew and supply needs, minimizing vessel turnaround time—your most critical metric.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Faster Vessel Turnaround</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Real-Time Terminal Updates</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Cargo Security Assurance</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Cost-Optimized Port Calls</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stat Counter Section (Removed for consistency with International-Coordination) -->
+
+    <!-- Port Operations Process (Vertical Timeline - UNIQUE STRUCTURE) -->
+    <section class="py-20 bg-rrm-dark text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-white mb-4">The Port Call Timeline</h2>
+                <p class="text-center text-gray-300 text-lg max-w-2xl mx-auto">
+                    A streamlined, four-stage process for guaranteed port efficiency and swift cargo handling.
+                </p>
+            </div>
+
+            <div class="timeline-container max-w-5xl mx-auto">
+
+                <!-- Item 1: Pre-Arrival -->
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-item-icon"></div>
+                    <div class="timeline-item-content p-6 rounded-2xl md:w-5/12 mx-auto md:mx-0 md:float-left">
+                        <span class="text-sm font-semibold uppercase text-rrm-yellow">Phase 1</span>
+                        <h3 class="text-2xl font-heading font-bold text-white mb-2">Pre-Arrival Planning</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Vessel clearance documents are submitted, and berth reservations are finalized. We liaise with marine services (tugs, pilots) to confirm the estimated time of arrival (ETA) and optimize the entry schedule.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Berthing & Documentation -->
+                <div class="timeline-item animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="timeline-item-icon"></div>
+                    <div class="timeline-item-content p-6 rounded-2xl md:w-5/12 mx-auto md:mx-0 md:float-right">
+                        <span class="text-sm font-semibold uppercase text-rrm-yellow">Phase 2</span>
+                        <h3 class="text-2xl font-heading font-bold text-white mb-2">On-Dock Operations</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Once berthed, customs, immigration, and port health clearances are expedited. Cargo manifests are synchronized with terminal systems to prepare for immediate discharge/loading.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Cargo Handling & Discharge -->
+                <div class="timeline-item animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="timeline-item-icon"></div>
+                    <div class="timeline-item-content p-6 rounded-2xl md:w-5/12 mx-auto md:mx-0 md:float-left">
+                        <span class="text-sm font-semibold uppercase text-rrm-yellow">Phase 3</span>
+                        <h3 class="text-2xl font-heading font-bold text-white mb-2">Efficient Cargo Movement</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Supervision of stevedoring, ensuring safe and correct cargo handling. We coordinate the immediate transfer of cleared containers to designated storage or transport trucks.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 4: Departure & Reporting -->
+                <div class="timeline-item animate-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="timeline-item-icon"></div>
+                    <div class="timeline-item-content p-6 rounded-2xl md:w-5/12 mx-auto md:mx-0 md:float-right">
+                        <span class="text-sm font-semibold uppercase text-rrm-yellow">Phase 4</span>
+                        <h3 class="text-2xl font-heading font-bold text-white mb-2">Post-Departure Audit</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Finalization of Disbursement Accounts (DA) and port dues. A comprehensive post-call report is submitted, detailing all activities, times, and costs to the vessel owner.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose RRM (Results Focus) -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">The RRM Port Efficiency Advantage</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    We deliver measurable results that reduce costs and keep your shipping schedules on track.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="feature-icon w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Reduced Transit Time</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Our proactive agency services cut down vessel time at port by leveraging key terminal relationships and fast-tracking documentation.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.1s;">
+                    <div class="feature-icon w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Full Regulatory Compliance</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Flawless submission of all marine and customs declarations ensures zero non-compliance issues and seamless port clearance.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.2s;">
+                    <div class="feature-icon w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Transparent Disbursement</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Detailed auditing and verification of port expenses minimizes unexpected costs and provides clear financial oversight of every port call.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section (Retained for feel) -->
+    <section class="py-20 professional-gradient">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-4xl mx-auto animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
+                    Ensure Your Vessel Operations Run Flawlessly
+                </h2>
+                <p class="text-xl text-gray-300 mb-10 leading-relaxed">
+                    Partner with RRM Limited for expert vessel agency and cargo coordination services in the region.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="index.html#contact" class="bg-rrm-yellow text-rrm-dark font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                        Get a Detailed Proposal
+                    </a>
+                    <a href="index.html#services" class="border-2 border-white text-white bg-transparent font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:bg-white hover:text-rrm-dark hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                        Explore Our Expertise
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Retained for feel) -->
+    <footer class="bg-rrm-dark text-gray-300 py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-rrm-yellow font-heading font-bold text-2xl mb-4">RRM Limited</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Professional logistics and clearing services for seamless international trade operations.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-heading font-bold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-rrm-yellow transition-colors duration-300">Home</a></li>
+                        <li><a href="index.html#about" class="hover:text-rrm-yellow transition-colors duration-300">About Us</a></li>
+                        <li><a href="index.html#services" class="hover:text-rrm-yellow transition-colors duration-300">Services</a></li>
+                        <li><a href="index.html#contact" class="hover:text-rrm-yellow transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-heading font-bold text-lg mb-4">Our Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="customs-clearance.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Customs Clearance</a></li>
+                        <li><a href="International-Coordination.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">International Coordination</a></li>
+                        <!-- Updated Link -->
+                        <li><a href="Transport-Logistics.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Port Coordination</a></li>
+                        <li><a href="Consultancy-Services.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Transport & Logistics</a></li>
+                        <li><a href="added.html" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Advisory Services</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-heading font-bold text-lg mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>📍 Dar es Salaam, Tanzania</li>
+                        <li>📧 info@rrmlimited.co.tz</li>
+                        <li>📞 +255 654327594</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2024</span> RRM Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

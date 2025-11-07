@@ -1,0 +1,18 @@
+# ----------------------------------------------------------------------
+# 1. ENFORCE HTTPS (Highly Recommended)
+# ----------------------------------------------------------------------
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ----------------------------------------------------------------------
+# 2. CLEAN URL AFTER FORM SUBMISSION
+#    This removes the unsightly ?status=... from the URL bar after submit
+# ----------------------------------------------------------------------
+# If the requested URI is /index.html and has a query string starting with ?status=
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\?status=([^\s]*) [NC]
+# Then internally redirect to /index.html (without the query string)
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Optional: If you prefer the URL to show index.html, use this instead:
+# RewriteRule ^index\.html$ index.html?status=%1 [R=301,L]

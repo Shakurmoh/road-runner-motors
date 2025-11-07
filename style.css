@@ -1,0 +1,220 @@
+<style>
+        /* Enhanced smooth transitions */
+        #main-header {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(0px);
+        }
+
+        .service-card-image {
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        /* Add hover effect to service card image */
+        .service-card-wrapper:hover .service-card-image {
+            transform: scale(1.05);
+        }
+
+        .service-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 60%);
+            pointer-events: none;
+        }
+
+        /* Professional gradient backgrounds */
+        .professional-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d2d2d; /* Darker track */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFD32A;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffc107;
+        }
+
+        /* Image placeholder styling */
+        .about-image {
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #FFD32A;
+        }
+
+        .stats-item {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-left: 4px solid #FFD32A;
+        }
+
+        /* Hero background image */
+        .hero-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Service card background images (using placeholders) */
+        #card-customs { 
+            background-image: url('images/imp.webp');
+        }
+        #card-international { 
+            background-image: url('images/cord.webp');
+        }
+        #card-port { 
+            background-image: url('images/ship.webp');
+        }
+        #card-transport { 
+            background-image: url('images/LOGISTICS.webp');
+        }
+        #card-advisory { 
+            background-image: url('images/cons.webp');
+        }
+        #card-value { 
+            background-image: url('images/value.webp');
+        }
+
+        /* Logo styling */
+        .logo-image {
+            height: 70px; /* --- MODIFIED (Point 1): Increased logo size from 50px to 70px --- */
+            width: auto;
+            transition: all 0.3s ease;
+            mix-blend-mode: screen; /* Removes white background */
+            filter: brightness(1.2);
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Ensure logo aligns vertically in header */
+        #logo-main {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Enhanced customer section styles */
+        .customer-logo {
+            width: 100%; /* Make logos responsive */
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+
+        .customer-logo-inner {
+            background: rgba(255, 255, 255, 0.05); /* Slightly lighter background */
+            backdrop-filter: blur(5px);
+            border-radius: 0.75rem; /* 12px */
+            padding: 1rem; /* 16px */
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            background-color: #f8f9fa; /* Light gray background for logos */
+            border: 1px solid #e9ecef;
+        }
+
+        .customer-logo-inner:hover {
+            background: #ffffff;
+            transform: scale(1.05);
+            border-color: #FFD32A;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        /* --- START: UPDATED LOGO STYLES FOR IMAGES --- */
+        /*
+        * CHANGE MADE HERE: Removed filter: grayscale(100%) and opacity: 0.7 
+        * to ensure logos are always in full color and visible.
+        */
+        .customer-logo-inner img {
+            transition: all 0.3s ease;
+        }
+
+        /* The hover style is now also redundant and has been removed */
+        /* --- END: UPDATED LOGO STYLES FOR IMAGES --- */
+        
+        /* Testimonial Card Styles */
+        .testimonial-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid #FFD32A;
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+        }
+        .testimonial-quote-icon {
+            font-family: 'Georgia', 'serif';
+            font-size: 4rem;
+            line-height: 1;
+            color: #FFD32A;
+            opacity: 0.6;
+        }
+
+
+        /* Contact form focus styles */
+        .form-input:focus {
+            border-color: #FFD32A;
+            box-shadow: 0 0 0 3px rgba(255, 211, 42, 0.3);
+            outline: none;
+        }
+
+        /* WhatsApp Button Styles */
+        .whatsapp-float-btn {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25D366; /* WhatsApp Green */
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float-btn:hover {
+            background-color: #128C7E; /* Darker Green on hover */
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float-btn {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+        }
+    </style>

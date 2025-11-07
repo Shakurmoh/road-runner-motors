@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse & Distribution Services | RRM Limited</title>
+    <meta name="description" content="Secure storage facilities and efficient distribution networks for inventory management and last-mile delivery.">
+    <meta property="og:title" content="Warehouse & Distribution Services | RRM Limited">
+    <meta property="og:description" content="Secure storage facilities and efficient distribution networks for inventory management and last-mile delivery.">
+    <meta property="og:image" content="https://placehold.co/1200x630/000000/FFD32A?text=RRM+Warehouse+Distribution">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rrm-yellow': '#FFD32A',
+                        'rrm-dark': '#000000',
+                        'rrm-gray': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-down': 'fadeInDown 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const mobileButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const logo = document.getElementById('logo-main');
+
+            // Enhanced scroll handler with smooth transitions
+            const handleScroll = () => {
+                const scrolled = window.scrollY > 100;
+                
+                if (scrolled) {
+                    header.classList.add('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.remove('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.add('text-gray-300'));
+                    navLinks.forEach(link => link.classList.remove('text-white'));
+                    logo.classList.add('text-gray-300');
+                    logo.classList.remove('text-white');
+                } else {
+                    header.classList.remove('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.add('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.remove('text-gray-300'));
+                    navLinks.forEach(link => link.classList.add('text-white'));
+                    logo.classList.remove('text-gray-300');
+                    logo.classList.add('text-white');
+                }
+            };
+
+            // Scroll event listener with throttling
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Initial call
+            handleScroll();
+
+            // Mobile menu functionality
+            mobileButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('animate-fade-in-down');
+            });
+
+            // Close mobile menu when link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('animate-fade-in-down');
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+    <style>
+        #main-header {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(0px);
+        }
+
+        .professional-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d2d2d;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFD32A;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffc107;
+        }
+
+        .logo-image {
+            height: 60px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/warehouse.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .process-step {
+            position: relative;
+        }
+
+        .process-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -40px;
+            width: 80px;
+            height: 2px;
+            background: #FFD32A;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card-image {
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card-wrapper:hover .service-card-image {
+            transform: scale(1.05);
+        }
+
+        .service-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 60%);
+            pointer-events: none;
+        }
+
+        #card-customs { 
+            background-image: url('images/import.jpg');
+        }
+        #card-consultancy { 
+            background-image: url('images/consult.jpg');
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-body text-gray-700 bg-white">
+
+    <header id="main-header" class="fixed top-0 w-full z-50 py-6 bg-transparent">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="index.html" id="logo-main" class="flex items-center space-x-3 transition-all duration-300 hover:opacity-90">
+                <img src="images/logo.jpg" alt="RRM Limited Logo" class="logo-image">
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Home</a>
+                <a href="index.html#about" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">About Us</a>
+                <a href="index.html#services" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Services</a>
+                <a href="index.html#customers" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Customers</a>
+                <a href="index.html#contact" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Contact</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-rrm-yellow hover:text-rrm-dark focus:outline-none transition-all duration-300" aria-label="Toggle navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-rrm-dark/95 backdrop-blur-sm shadow-2xl fixed w-full z-40 pt-20 top-0">
+        <a href="index.html" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-t border-gray-700">Home</a>
+        <a href="index.html#about" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">About Us</a>
+        <a href="index.html#services" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Services</a>
+        <a href="index.html#customers" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Customers</a>
+        <a href="index.html#contact" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-b border-gray-700">Contact</a>
+    </div>
+
+    <section class="hero-background py-24 md:py-32 text-white mt-[-100px] pt-40 md:pt-48 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-rrm-yellow rounded-full"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 bg-rrm-yellow rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-heading font-extrabold mb-6 leading-tight animate-fade-in-down">
+                Warehouse & <span class="text-rrm-yellow">Distribution</span> Services
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                Secure storage facilities and efficient distribution networks for inventory management and last-mile delivery.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="index.html#services" class="bg-rrm-yellow text-rrm-dark font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    All Services
+                </a>
+                <a href="index.html#contact" class="border-2 border-rrm-yellow text-white bg-transparent font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:bg-rrm-yellow hover:text-rrm-dark hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-6">Integrated Storage & Distribution</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        RRM Limited offers comprehensive warehouse and distribution services designed to optimize your supply chain operations. Our strategically located facilities provide secure storage solutions coupled with efficient distribution networks.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        From inventory management to last-mile delivery, we provide end-to-end solutions that ensure your products are stored safely and delivered efficiently to their final destinations.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Secure Facilities</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Inventory Management</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Temperature Control</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Distribution Network</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="rounded-2xl shadow-2xl overflow-hidden relative h-96" 
+                         style="background-image: url('images/warehouse-detail.jpg'); background-size: cover; background-position: center;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Our Warehouse Solutions</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    Comprehensive storage and handling solutions tailored to your specific requirements.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">General Warehousing</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Secure storage facilities with advanced security systems, proper ventilation, and organized layout for efficient inventory management.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Cold Storage</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Temperature-controlled facilities for perishable goods, pharmaceuticals, and other temperature-sensitive products with precise climate control.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8 animate-on-scroll transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-rrm-yellow rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Bonded Warehousing</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Secure storage for goods under customs control, allowing deferred payment of duties and taxes until goods are released for local consumption.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Our Distribution Process</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    A systematic approach to ensure efficient storage and timely distribution of your goods.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">1</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Receiving & Inspection</h3>
+                    <p class="text-gray-600">
+                        Careful receiving of goods with thorough inspection, verification against documentation, and quality checks.
+                    </p>
+                </div>
+
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">2</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Storage & Inventory</h3>
+                    <p class="text-gray-600">
+                        Systematic storage with proper categorization, labeling, and real-time inventory tracking using WMS.
+                    </p>
+                </div>
+
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">3</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Order Processing</h3>
+                    <p class="text-gray-600">
+                        Efficient order picking, packing, and preparation for dispatch according to customer specifications.
+                    </p>
+                </div>
+
+                <div class="process-step text-center p-6 animate-on-scroll rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1" style="animation-delay: 0.3s;">
+                    <div class="w-20 h-20 bg-rrm-yellow rounded-full flex items-center justify-center text-rrm-dark font-bold text-2xl mx-auto mb-6">4</div>
+                    <h3 class="text-xl font-heading font-bold text-rrm-dark mb-4">Dispatch & Delivery</h3>
+                    <p class="text-gray-600">
+                        Timely dispatch with proper documentation and real-time tracking until final delivery to customers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-rrm-dark text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl font-heading font-bold text-white mb-6">Our Warehouse Facilities</h2>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        We operate modern, secure warehouse facilities strategically located to serve major markets and distribution hubs across East Africa.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Strategic locations near major ports, airports, and industrial areas</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">24/7 security with CCTV surveillance and access control systems</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Modern material handling equipment for efficient operations</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Temperature and humidity control for sensitive products</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-3 h-3 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300">Warehouse Management System (WMS) for real-time inventory tracking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-rrm-gray rounded-2xl p-8 shadow-2xl animate-on-scroll" style="animation-delay: 0.1s;">
+                    <h3 class="text-2xl font-heading font-bold text-white mb-6">Need Storage Solutions?</h3>
+                    <p class="text-gray-300 mb-6">
+                        Our warehouse and distribution experts can design a storage solution that meets your specific requirements, whether for short-term storage or long-term inventory management.
+                    </p>
+                    <a href="index.html#contact" class="inline-block bg-rrm-yellow text-rrm-dark font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        Get a Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-3xl font-heading font-bold text-rrm-dark mb-4">Related Services</h2>
+                <p class="text-center text-gray-600 max-w-2xl mx-auto">
+                    Explore our other logistics solutions that complement our warehouse and distribution services.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <a href="customs-clearance.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-customs" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">Customs Clearance</h3>
+                        <p class="text-gray-600 font-body leading-relaxed">
+                            Expert handling of import/export documentation and regulatory compliance to ensure swift passage of goods.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="consultancy.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-consultancy" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">Consultancy Services</h3>
+                        <p class="text-gray-600 font-body leading-relaxed">
+                            Strategic advice on supply chain optimization, regulatory compliance, and logistics process improvement.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-rrm-dark py-12 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <a href="index.html" class="inline-block mb-6">
+                        <img src="images/logo.jpg" alt="RRM Limited Logo" class="logo-image">
+                    </a>
+                    <p class="text-gray-300 mb-6 max-w-md">
+                        Delivering precision and trust through reliable clearing, forwarding, and integrated logistics solutions across East Africa.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-rrm-yellow transition-colors duration-300">
+                            <span class="sr-only">Facebook</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.129 22 16.99 22 12z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-rrm-yellow transition-colors duration-300">
+                            <span class="sr-only">Twitter</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-rrm-yellow transition-colors duration-300">
+                            <span class="sr-only">LinkedIn</span>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-heading font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="customs-clearance.html" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Customs Clearance</a></li>
+                        <li><a href="international-coordination.html" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">International Coordination</a></li>
+                        <li><a href="transport-logistics.html" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Transport & Logistics</a></li>
+                        <li><a href="warehouse-distribution.html" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Warehouse & Distribution</a></li>
+                        <li><a href="consultancy.html" class="text-gray-300 hover:text-rrm-yellow transition-colors duration-300">Consultancy Services</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-heading font-bold mb-4">Contact</h3>
+                    <address class="text-gray-300 not-italic">
+                        <p class="mb-2">RRM Limited</p>
+                        <p class="mb-2">Nairobi, Kenya</p>
+                        <p class="mb-2">Email: info@rrmlimited.com</p>
+                        <p class="mb-2">Phone: +254 700 000000</p>
+                    </address>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2024</span> RRM Limited. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

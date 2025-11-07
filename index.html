@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRM Limited — Delivering Efficiency Across Borders</title>
+    <meta name="description" content="Reliable clearing, forwarding, and logistics solutions across East Africa.">
+    <meta property="og:title" content="RRM Limited — Logistics Solutions">
+    <meta property="og:description" content="Reliable clearing, forwarding, and logistics solutions across East Africa.">
+    <meta property="og:image" content="https://placehold.co/1200x630/000000/FFD32A?text=RRM+Limited">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rrm-yellow': '#FFD32A',
+                        'rrm-dark': '#000000',
+                        'rrm-gray': '#1a1a1a',
+                        // Added WhatsApp Green for the button
+                        'whatsapp-green': '#25D366', 
+                        'whatsapp-dark': '#128C7E',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-down': 'fadeInDown 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'count-up': 'countUp 2s ease-out',
+                        'slide-infinite': 'slideInfinite 30s linear infinite', // Animation for customer slide
+                        'logo-pulse': 'logoPulse 2s ease-out', // NEW ANIMATION
+                    },
+                    keyframes: {
+                        // NEW KEYFRAME
+                        logoPulse: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.9', transform: 'scale(0.98)' },
+                        },
+                        // END NEW KEYFRAME
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' }, // Changed from +20px to -20px to prevent initial scroll jump
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        countUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        // Keyframe definition for the customer slide
+                        slideInfinite: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' }, // Move by 50% for seamless loop
+                        }
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.getElementById('main-header');
+            const mobileButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const heroSection = document.getElementById('home');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const logo = document.getElementById('logo-main');
+            let scrollThreshold = 100;
+
+            // Enhanced scroll handler with smooth transitions
+            const handleScroll = () => {
+                const scrolled = window.scrollY > scrollThreshold;
+                
+                if (scrolled) {
+                    header.classList.add('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.remove('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.add('text-gray-300'));
+                    navLinks.forEach(link => link.classList.remove('text-white'));
+                    logo.classList.add('text-gray-300');
+                    logo.classList.remove('text-white');
+                } else {
+                    header.classList.remove('bg-rrm-dark', 'shadow-2xl', 'py-4', 'backdrop-blur-sm');
+                    header.classList.add('py-6', 'bg-transparent');
+                    navLinks.forEach(link => link.classList.remove('text-gray-300'));
+                    navLinks.forEach(link => link.classList.add('text-white'));
+                    logo.classList.remove('text-gray-300');
+                    logo.classList.add('text-white');
+                }
+            };
+
+            // Calculate threshold based on hero section
+            if (heroSection) {
+                scrollThreshold = heroSection.offsetHeight - 100;
+            }
+
+            // Scroll event listener with throttling
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Initial call
+            handleScroll();
+
+            // Mobile menu functionality
+            mobileButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('animate-fade-in-down');
+            });
+
+            // Close mobile menu when link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('animate-fade-in-down');
+                });
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // Check if target="_blank" is present, if so, do not prevent default smooth scroll logic
+                    if (this.getAttribute('target') === '_blank') return;
+                    
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add intersection observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        if (entry.target.classList.contains('stats-card')) {
+                            // Only animate counters if they haven't been animated yet
+                            if (!entry.target.dataset.animated) {
+                                animateCounters();
+                                entry.target.dataset.animated = 'true';
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation - ADDED '.testimonial-card'
+            document.querySelectorAll('.animate-on-scroll, .stats-card, .mission-card, .testimonial-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Counter animation function
+            function animateCounters() {
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    // Check if already animated
+                    if (counter.dataset.animated) return;
+                    counter.dataset.animated = 'true';
+
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000;
+                    let start = 0;
+                    const stepTime = 16; // roughly 60fps
+                    const steps = duration / stepTime;
+                    const increment = target / steps;
+                    
+                    const timer = setInterval(() => {
+                        start += increment;
+                        if (start >= target) {
+                            counter.textContent = target.toLocaleString() + (counter.getAttribute('data-suffix') || '');
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(start).toLocaleString() + (counter.getAttribute('data-suffix') || '');
+                        }
+                    }, stepTime);
+                });
+            }
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Form Feedback Handler for PHP Mailer integration
+            const formFeedback = document.getElementById('form-feedback');
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const message = urlParams.get('message');
+
+            if (status && formFeedback) {
+                formFeedback.classList.remove('hidden');
+                formFeedback.innerHTML = ''; // Clear previous messages
+                
+                // Define classes for alert styling
+                const baseClasses = ['border', 'text-center'];
+                
+                // Clear all previous alert styles
+                formFeedback.classList.remove('bg-green-100', 'border-green-400', 'text-green-700', 'bg-red-100', 'border-red-400', 'text-red-700', 'hidden');
+
+                if (status === 'success') {
+                    formFeedback.classList.add('bg-green-100', 'border-green-400', 'text-green-700', ...baseClasses);
+                    formFeedback.innerHTML = '<strong>Success!</strong> Your message has been sent. We will contact you soon.';
+                } else if (status === 'error') {
+                    formFeedback.classList.add('bg-red-100', 'border-red-400', 'text-red-700', ...baseClasses);
+                    // Decode URL-encoded message for display
+                    const displayMessage = decodeURIComponent(message || 'Failed to send message. Please try again or call us.');
+                    formFeedback.innerHTML = '<strong>Error!</strong> ' + displayMessage;
+                }
+                
+                // Clear the URL parameters after displaying
+                setTimeout(() => {
+                    if (formFeedback) {
+                        formFeedback.classList.add('hidden');
+                    }
+                    // Remove query parameters from URL without refreshing
+                    window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+                }, 7000); // Display for 7 seconds
+            }
+
+        });
+    </script>
+    <style>
+        /* Enhanced smooth transitions - ADDED will-change for performance */
+        #main-header {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(0px);
+            will-change: padding, background-color, backdrop-filter; /* Added for smoother scroll transitions */
+        }
+
+        .service-card-image {
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+
+        /* Add hover effect to service card image */
+        .service-card-wrapper:hover .service-card-image {
+            transform: scale(1.05);
+        }
+
+        .service-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 60%);
+            pointer-events: none;
+        }
+
+        /* Professional gradient backgrounds */
+        .professional-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d2d2d; /* Darker track */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFD32A;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffc107;
+        }
+
+        /* Image placeholder styling */
+        .about-image {
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #FFD32A;
+        }
+
+        .stats-item {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-left: 4px solid #FFD32A;
+        }
+
+        /* Hero background image - REMOVED background-attachment: fixed for performance */
+        .hero-background {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero.webp');
+            background-size: cover;
+            background-position: center;
+            /* Removed background-attachment: fixed for performance */
+        }
+
+        /* Service card background images (using placeholders) */
+        #card-customs { 
+            background-image: url('images/imp.webp');
+        }
+        #card-international { 
+            background-image: url('images/cord.webp');
+        }
+        #card-port { 
+            background-image: url('images/ship.webp');
+        }
+        #card-transport { 
+            background-image: url('images/LOGISTICS.webp');
+        }
+        #card-advisory { 
+            background-image: url('images/cons.webp');
+        }
+        #card-value { 
+            background-image: url('images/value.webp');
+        }
+
+        /* Logo styling */
+        .logo-image {
+            height: 90px; /* --- MODIFIED: Increased logo size from 70px to 90px --- */
+            width: auto;
+            transition: all 0.3s ease;
+            mix-blend-mode: screen; /* Removes white background */
+            filter: brightness(1.2);
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Ensure logo aligns vertically in header */
+        #logo-main {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Enhanced customer section styles */
+        .customer-logo {
+            width: 100%; /* Make logos responsive */
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+
+        .customer-logo-inner {
+            background: rgba(255, 255, 255, 0.05); /* Slightly lighter background */
+            backdrop-filter: blur(5px);
+            border-radius: 0.75rem; /* 12px */
+            padding: 1rem; /* 16px */
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            background-color: #f8f9fa; /* Light gray background for logos */
+            border: 1px solid #e9ecef;
+        }
+
+        .customer-logo-inner:hover {
+            background: #ffffff;
+            transform: scale(1.05);
+            border-color: #FFD32A;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        /* --- START: UPDATED LOGO STYLES FOR IMAGES --- */
+        /*
+        * CHANGE MADE HERE: Removed filter: grayscale(100%) and opacity: 0.7 
+        * to ensure logos are always in full color and visible.
+        */
+        .customer-logo-inner img {
+            transition: all 0.3s ease;
+        }
+
+        /* The hover style is now also redundant and has been removed */
+        /* --- END: UPDATED LOGO STYLES FOR IMAGES --- */
+        
+        /* Testimonial Card Styles */
+        .testimonial-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid #FFD32A;
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+        }
+        .testimonial-quote-icon {
+            font-family: 'Georgia', 'serif';
+            font-size: 4rem;
+            line-height: 1;
+            color: #FFD32A;
+            opacity: 0.6;
+        }
+
+
+        /* Contact form focus styles */
+        .form-input:focus {
+            border-color: #FFD32A;
+            box-shadow: 0 0 0 3px rgba(255, 211, 42, 0.3);
+            outline: none;
+        }
+
+        /* WhatsApp Button Styles */
+        .whatsapp-float-btn {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25D366; /* WhatsApp Green */
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float-btn:hover {
+            background-color: #128C7E; /* Darker Green on hover */
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float-btn {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+<body class="font-body text-gray-700 bg-white">
+
+    <header id="main-header" class="fixed top-0 w-full z-50 py-6 bg-transparent">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="#home" id="logo-main" class="flex items-center space-x-3 transition-all duration-300 hover:opacity-90">
+                <img src="images/RRM Logo.png" alt="RRM Limited Logo" class="logo-image animate-logo-pulse" loading="lazy">
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Home</a>
+                <a href="#about" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">About Us</a>
+                <a href="#services" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Services</a>
+                <a href="#customers" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Customers</a>
+                <a href="#team" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Team</a>
+                <a href="#contact" class="nav-link text-white hover:text-rrm-yellow transition-all duration-300 font-medium">Contact</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-white hover:bg-rrm-yellow hover:text-rrm-dark focus:outline-none transition-all duration-300" aria-label="Toggle navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-rrm-dark/95 backdrop-blur-sm shadow-2xl fixed w-full z-40 pt-20 top-0">
+        <a href="#home" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-t border-gray-700">Home</a>
+        <a href="#about" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">About Us</a>
+        <a href="#services" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Services</a>
+        <a href="#customers" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Customers</a>
+        <a href="#team" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300">Team</a>
+        <a href="#contact" class="block py-4 px-6 text-white font-medium hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300 border-b border-gray-700">Contact</a>
+    </div>
+
+    <section id="home" class="hero-background py-24 md:py-40 text-white mt-[-100px] pt-40 md:pt-60 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-rrm-yellow rounded-full"></div>
+            <div class="absolute top-40 right-20 w-16 h-16 bg-rrm-yellow rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-heading font-extrabold mb-6 leading-tight animate-fade-in-down">
+                Delivering <span class="text-rrm-yellow">Precision</span> and <span class="text-rrm-yellow">Trust</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 max-w-4xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">
+                Reliable clearing, forwarding, and integrated logistics solutions across East Africa, powered by decades of experience and cutting-edge operational technology.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="#services" class="bg-rrm-yellow text-rrm-dark font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    Our Services
+                </a>
+                <a href="#contact" class="border-2 border-rrm-yellow text-white bg-transparent font-semibold py-4 px-10 text-lg rounded-lg shadow-2xl hover:bg-rrm-yellow hover:text-rrm-dark hover:shadow-3xl transition-all duration-300 inline-block transform hover:-translate-y-1">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 md:py-28 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-6">About RRM Limited</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        With over two decades of excellence in logistics and supply chain management, RRM Limited has established itself as a trusted partner for businesses across East Africa. Our commitment to precision, reliability, and innovation drives everything we do.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        We understand the complexities of cross-border trade and have built a reputation for delivering seamless logistics solutions that empower businesses to grow and thrive in dynamic markets.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Industry Expertise</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Regional Coverage</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Technology Driven</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-700 font-medium">Customer Focused</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll">
+                    <div class="about-image rounded-2xl shadow-2xl overflow-hidden relative h-96" 
+                         style="background-image: url('images/abt.webp');">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-rrm-dark rounded-3xl p-8 md:p-12 shadow-2xl stats-card">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="stats-item p-6 rounded-2xl text-center">
+                        <div class="text-4xl md:text-5xl font-heading font-bold text-rrm-yellow mb-2 counter" data-target="6" data-suffix="+">0+</div>
+                        <div class="text-gray-300 text-lg font-medium">Years Experience</div>
+                        <div class="text-gray-400 text-sm mt-2">Trusted since 2019</div>
+                    </div>
+                    
+                    <div class="stats-item p-6 rounded-2xl text-center">
+                        <div class="text-4xl md:text-5xl font-heading font-bold text-rrm-yellow mb-2 counter" data-target="200" data-suffix="+">0+</div>
+                        <div class="text-gray-300 text-lg font-medium">Clients Served</div>
+                        <div class="text-gray-400 text-sm mt-2">Across East Africa</div>
+                    </div>
+                    
+                    <div class="stats-item p-6 rounded-2xl text-center">
+                        <div class="text-4xl md:text-5xl font-heading font-bold text-rrm-yellow mb-2 counter" data-target="7000" data-suffix="+">0+</div>
+                        <div class="text-gray-300 text-lg font-medium">Shipments Managed</div>
+                        <div class="text-gray-400 text-sm mt-2">With precision & care</div>
+                    </div>
+                    
+                    <div class="stats-item p-6 rounded-2xl text-center">
+                        <div class="text-4xl md:text-5xl font-heading font-bold text-rrm-yellow mb-2 counter" data-target="98" data-suffix="%">0%</div>
+                        <div class="text-gray-300 text-lg font-medium">On-Time Delivery</div>
+                        <div class="text-gray-400 text-sm mt-2">Industry leading reliability</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+                <div class="mission-card bg-gray-50 rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-rrm-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Our Mission</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        To deliver exceptional logistics solutions that drive business growth through reliability, innovation, and unparalleled customer service across East Africa.
+                    </p>
+                </div>
+                <div class="mission-card bg-gray-50 rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-rrm-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Our Vision</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        To be the leading logistics partner in East Africa, setting new standards for efficiency, transparency, and customer satisfaction in the supply chain industry.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 md:py-28 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Our Core Services</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    Comprehensive logistics and supply chain solutions designed to meet your business needs with precision and reliability.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <a href="customs-clearance.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-customs" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">Customs Clearance</h3>
+                        <p class="text-gray-600 font-body leading-relaxed mb-12">
+                            Expert handling of import/export documentation and regulatory compliance to ensure swift passage of goods.
+                        </p>
+                        <div class="absolute bottom-0 right-0 m-6 bg-rrm-yellow text-rrm-dark w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 transform group-hover:bg-rrm-dark group-hover:text-rrm-yellow">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="International-Coordination.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-international" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">International Coordination</h3>
+                        <p class="text-gray-600 font-body leading-relaxed mb-12">
+                            Seamless management of global logistics chains, coordinating freight movement and compliance across countries.
+                        </p>
+                        <div class="absolute bottom-0 right-0 m-6 bg-rrm-yellow text-rrm-dark w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 transform group-hover:bg-rrm-dark group-hover:text-rrm-yellow">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="shipping-port.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-port" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">Shipping & Port</h3>
+                        <p class="text-gray-600 font-body leading-relaxed mb-12">
+                            Efficient coordination of vessel operations at major ports to minimize delays and optimize shipping costs.
+                        </p>
+                        <div class="absolute bottom-0 right-0 m-6 bg-rrm-yellow text-rrm-dark w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 transform group-hover:bg-rrm-dark group-hover:text-rrm-yellow">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="Transport-Logistics.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-transport" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">Transport & Logistics</h3>
+                        <p class="text-gray-600 font-body leading-relaxed mb-12">
+                            Integrated road, rail, and multimodal transport solutions, managed end-to-end for safe and timely movement.
+                        </p>
+                        <div class="absolute bottom-0 right-0 m-6 bg-rrm-yellow text-rrm-dark w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 transform group-hover:bg-rrm-dark group-hover:text-rrm-yellow">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="Consultancy-Services.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-advisory" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">Advisory & Consultancy</h3>
+                        <p class="text-gray-600 font-body leading-relaxed mb-12">
+                            Strategic guidance on supply chain optimization, customs duties, and trade agreements to minimize risk.
+                        </p>
+                        <div class="absolute bottom-0 right-0 m-6 bg-rrm-yellow text-rrm-dark w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 transform group-hover:bg-rrm-dark group-hover:text-rrm-yellow">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="added.html" class="service-card-wrapper bg-white rounded-2xl shadow-lg overflow-hidden block relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div id="card-value" class="service-card-image"></div>
+                    <div class="p-6 md:p-8 relative">
+                        <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-3">Value-Added Services</h3>
+                        <p class="text-gray-600 font-body leading-relaxed mb-12">
+                            Warehousing, packaging, labeling, inventory management, and distribution services to integrate your supply chain.
+                        </p>
+                        <div class="absolute bottom-0 right-0 m-6 bg-rrm-yellow text-rrm-dark w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 transform group-hover:bg-rrm-dark group-hover:text-rrm-yellow">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="customers" class="py-20 md:py-28 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Our Trusted Partners</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    Global and local businesses who rely on RRM Limited for their critical logistics needs.
+                </p>
+            </div>
+
+            <div class="overflow-hidden relative h-32 mb-16 bg-gray-50 rounded-xl shadow-inner">
+                <div class="w-[200%] flex absolute top-0 left-0 animate-slide-infinite">
+                    <div class="flex w-1/2 justify-around items-center space-x-8 py-4">
+                        <div class="customer-logo">
+                            <div class="customer-logo-inner">
+                                <img src="images/OIP.webp" alt="Client Logo 1" class="h-16 w-auto" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="customer-logo">
+                            <div class="customer-logo-inner">
+                                <img src="images/arcadia.webp" alt="Client Logo 2" class="h-16 w-auto" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="customer-logo">
+                            <div class="customer-logo-inner">
+                                <img src="images/cbr.webp" alt="Client Logo 3" class="h-16 w-auto" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="customer-logo">
+                            <div class="customer-logo-inner">
+                                <img src="images/plz.webp" alt="Client Logo 4" class="h-16 w-auto" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="customer-logo">
+                            <div class="customer-logo-inner">
+                                <img src="images/eukor.webp" alt="Client Logo 5" class="h-16 w-auto" loading="lazy">
+                            </div>
+                        </div>
+                        <div class="customer-logo">
+                            <div class="customer-logo-inner">
+                                <img src="images/wetfoot.webp" alt="Client Logo 6" class="h-16 w-auto" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+                </div>
+            </div>
+
+            <div class="text-center mb-10 animate-on-scroll">
+                <h3 class="text-3xl font-heading font-bold text-rrm-dark mb-4">What Our Clients Say</h3>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    Real feedback from partners who trust us with their logistics.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-on-scroll">
+                <div class="testimonial-card rounded-xl p-8 shadow-lg">
+                    <div class="testimonial-quote-icon mb-4">“</div>
+                    <p class="text-gray-600 italic leading-relaxed mb-6">
+                        "RRM Limited transformed our supply chain. Their professionalism and on-time delivery are unmatched in East Africa. We consider them a core part of our success."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="ml-4">
+                            <p class="font-bold text-rrm-dark font-heading">Jane michael</p>
+                            <p class="text-sm text-gray-500">Logistics Manager, plz</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card rounded-xl p-8 shadow-lg">
+                    <div class="testimonial-quote-icon mb-4">“</div>
+                    <p class="text-gray-600 italic leading-relaxed mb-6">
+                        "The customs clearance process was always a bottleneck for us. Since partnering with RRM, our goods move seamlessly across borders. Their expertise is invaluable."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="ml-4">
+                            <p class="font-bold text-rrm-dark font-heading">John kimario</p>
+                            <p class="text-sm text-gray-500">Procurement Manager, eukor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card rounded-xl p-8 shadow-lg">
+                    <div class="testimonial-quote-icon mb-4">“</div>
+                    <p class="text-gray-600 italic leading-relaxed mb-6">
+                        "Reliable, efficient, and transparent. The RRM team is always responsive and provides clear communication, giving us peace of mind for our high-value shipments."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="ml-4">
+                            <p class="font-bold text-rrm-dark font-heading">Shafii mohamed</p>
+                            <p class="text-sm text-gray-500">Operations Director, Clickot printing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="features" class="py-20 md:py-28 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Our Core Features</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    Why partners choose us for their critical logistics needs.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-rrm-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 002 12c0 2.753 1.04 5.46 3.016 7.375L2.4 21.6a.75.75 0 001.06 1.06l2.97-2.97c1.915 1.976 4.622 3.016 7.375 3.016a12.001 12.001 0 008.618-3.04 11.955 11.955 0 01-3.04-8.618z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Guaranteed Reliability</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        We commit to industry-leading on-time delivery rates and absolute consistency across all our service lines.
+                    </p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-rrm-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Advanced Technology</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        We leverage cutting-edge operational technology for real-time tracking, transparent reporting, and efficient supply chain management.
+                    </p>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-rrm-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-2.356M17 20H7m10 0v-2c0-1.657-1.343-3-3-3H7M7 20H2v-2a3 3 0 015.356-2.356M7 20v-2c0-1.657 1.343-3 3-3h.086m-1.086 2.356A3 3 0 017 18v2m0-6A4 4 0 107 6a4 4 0 000 6zM17 14a4 4 0 100-8 4 4 0 000 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-4">Expert Local Knowledge</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Our deep understanding of East African customs, regulations, and trade routes allows us to navigate complexities and avoid costly delays.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-20 md:py-28 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-heading font-bold text-rrm-dark mb-4">Meet Our Team</h2>
+                <p class="text-center text-gray-600 text-lg max-w-2xl mx-auto">
+                    The dedicated professionals behind our reliable service and vision.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-lg flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-on-scroll">
+                    <img class="w-32 h-32 rounded-full object-cover mb-6 border-4 border-rrm-yellow" src="images/team1.webp" alt="Team Member 1" loading="lazy">
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-2">John kamukulu</h3>
+                    <p class="text-rrm-yellow font-semibold mb-4">Founder & Managing Director</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        A visionary leader with over 6 years in logistics, Rashidi drives our strategic growth and commitment to excellence.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-lg flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 animate-on-scroll">
+                    <img class="w-32 h-32 rounded-full object-cover mb-6 border-4 border-rrm-yellow" src="images/team2.webp" alt="Team Member 2" loading="lazy">
+                    <h3 class="text-2xl font-heading font-bold text-rrm-dark mb-2">kimaro</h3>
+                    <p class="text-rrm-yellow font-semibold mb-4">Operations Manager</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Rehema ensures seamless daily operations and manages our large network of customs and transport partners with precision.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 md:py-28 professional-gradient text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl font-heading font-bold text-white mb-6">Get in Touch with RRM</h2>
+                    <p class="text-lg text-gray-300 mb-10 leading-relaxed">
+                        Ready to optimize your supply chain in East Africa? Contact our team today for a tailored logistics consultation and quote.
+                    </p>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-5 h-5 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-1">Head Office</h4>
+                                <p class="text-gray-300">Ushirika tower 3rd floor, Lumumba St, Dar es Salaam</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-5 h-5 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-1">Phone</h4>
+                                <p class="text-gray-300">+255 654327594</p>
+                                <p class="text-gray-300">+255 622879936</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 bg-rrm-yellow rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-5 h-5 text-rrm-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-1">Email</h4>
+                                <p class="text-gray-300">info@rrmlimited.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll">
+                    <div id="form-feedback" class="p-4 rounded-lg mb-4 hidden" role="alert"></div>
+
+                    <form action="send_email.php" method="POST" class="bg-white p-8 md:p-10 rounded-2xl shadow-2xl space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                            <input type="text" name="name" id="name" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg text-rrm-dark transition duration-300">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" name="email" id="email" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg text-rrm-dark transition duration-300">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea name="message" id="message" rows="4" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg text-rrm-dark transition duration-300"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-rrm-yellow text-rrm-dark font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location-map" class="w-full h-[400px] md:h-[500px] bg-gray-200">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.5665439932204!2d39.27759527499571!3d-6.822452993175327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c4b074947332d%3A0x5c4fe70cf9bfd27e!2sNew%20Ushirika%20Tower!5e0!3m2!1sen!2stz!4v1761484054285!5m2!1sen!2stz" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
+
+    <footer class="bg-rrm-gray text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <a href="#home" class="flex items-center space-x-3 mb-6">
+                        <img src="images/RRM Logo.png" alt="RRM Limited Logo" class="logo-image">
+                    </a>
+                    <p class="text-gray-400 mb-6 max-w-md leading-relaxed">
+                        Delivering precision and trust through reliable clearing, forwarding, and integrated logistics solutions across East Africa.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://wa.me/255654327594?text=Hello%20RRM%20Limited,%20I%20am%20interested%20in%20your%20logistics%20services." target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-rrm-dark rounded-full flex items-center justify-center hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300" aria-label="WhatsApp">
+                            <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+                                <path d="M12.001 2.001C6.485 2.001 2 6.486 2 12.001c0 3.327 1.455 6.333 3.76 8.423l-1.332 4.887 5.044-1.32c.542.046 1.087.07 1.63.07h.001c5.515 0 10.001-4.486 10.001-10.001 0-5.515-4.486-10.001-10.001-10.001zM12.001 20c-1.464 0-2.92-.4-4.183-1.168l-4.524 1.18 1.19-4.372c-.84-1.256-1.282-2.73-1.282-4.261 0-4.417 3.585-8.001 8.001-8.001 4.416 0 8.001 3.584 8.001 8.001 0 4.417-3.585 8.001-8.001 8.001h-.001zm-3.178-5.234c-.16-.079-.993-.496-1.147-.552-.154-.055-.266-.083-.377.083-.111.166-.43.552-.525.663-.095.111-.19.125-.353.042-.163-.083-.681-.252-1.295-.8-.476-.418-.797-1.03-1.171-1.666-.375-.636-.041-.98.057-1.086.098-.105.218-.261.329-.389.111-.128.148-.222.185-.377.037-.154.019-.289-.009-.401-.028-.112-.255-.615-.35-.841-.095-.227-.19-.19-.377-.185-.188-.005-.401-.005-.614-.005s-.496.083-.758.377c-.262.294-1.002.977-1.002 2.383 0 1.406 1.023 2.766 1.167 2.96 1.054 1.577 2.054 2.162 3.86 2.65 1.52.418 2.316.34 3.037.21.72-.13 1.147-.552 1.301-.846.154-.294.154-.552.103-.663-.051-.111-.19-.294-.377-.377z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/rrmlimited_official/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-rrm-dark rounded-full flex items-center justify-center hover:bg-rrm-yellow hover:text-rrm-dark transition-all duration-300" aria-label="Instagram">
+                            <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5">
+                                <path d="M7.5 2C4.467 2 2 4.467 2 7.5v9C2 19.533 4.467 22 7.5 22h9c3.033 0 5.5-2.467 5.5-5.5v-9C22 4.467 19.533 2 16.5 2h-9zM7.5 4h9c1.933 0 3.5 1.567 3.5 3.5v9c0 1.933-1.567 3.5-3.5 3.5h-9c-1.933 0-3.5-1.567-3.5-3.5v-9C4 5.567 5.567 4 7.5 4zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.75-2.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-heading font-bold text-white mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-rrm-yellow transition-all duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-rrm-yellow transition-all duration-300">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-rrm-yellow transition-all duration-300">Services</a></li>
+                        <li><a href="#customers" class="text-gray-400 hover:text-rrm-yellow transition-all duration-300">Customers</a></li>
+                        <li><a href="#team" class="text-gray-400 hover:text-rrm-yellow transition-all duration-300">Team</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-rrm-yellow transition-all duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-heading font-bold text-white mb-6">Contact Info</h3>
+                    <p class="text-gray-400 mb-4">Ushirika tower 3rd floor, Lumumba St, Dar es Salaam</p>
+                    <p class="text-gray-400 mb-4">Email: info@rrmlimited.com</p>
+                    <p class="text-gray-400">Phone: +255 654327594</p>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-10 pt-6">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-gray-400">
+                    © <span id="current-year">2025</span> RRM Limited. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/255654327594?text=Hello%20RRM%20Limited,%20I%20am%20interested%20in%20your%20logistics%20services." 
+       class="whatsapp-float-btn" 
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <svg fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8">
+            <path d="M12.001 2.001C6.485 2.001 2 6.486 2 12.001c0 3.327 1.455 6.333 3.76 8.423l-1.332 4.887 5.044-1.32c.542.046 1.087.07 1.63.07h.001c5.515 0 10.001-4.486 10.001-10.001 0-5.515-4.486-10.001-10.001-10.001zM12.001 20c-1.464 0-2.92-.4-4.183-1.168l-4.524 1.18 1.19-4.372c-.84-1.256-1.282-2.73-1.282-4.261 0-4.417 3.585-8.001 8.001-8.001 4.416 0 8.001 3.584 8.001 8.001 0 4.417-3.585 8.001-8.001 8.001h-.001zm-3.178-5.234c-.16-.079-.993-.496-1.147-.552-.154-.055-.266-.083-.377.083-.111.166-.43.552-.525.663-.095.111-.19.125-.353.042-.163-.083-.681-.252-1.295-.8-.476-.418-.797-1.03-1.171-1.666-.375-.636-.041-.98.057-1.086.098-.105.218-.261.329-.389.111-.128.148-.222.185-.377.037-.154.019-.289-.009-.401-.028-.112-.255-.615-.35-.841-.095-.227-.19-.19-.377-.185-.188-.005-.401-.005-.614-.005s-.496.083-.758.377c-.262.294-1.002.977-1.002 2.383 0 1.406 1.023 2.766 1.167 2.96 1.054 1.577 2.054 2.162 3.86 2.65 1.52.418 2.316.34 3.037.21.72-.13 1.147-.552 1.301-.846.154-.294.154-.552.103-.663-.051-.111-.19-.294-.377-.377z"/>
+        </svg>
+    </a>
+</body>
+</html>
